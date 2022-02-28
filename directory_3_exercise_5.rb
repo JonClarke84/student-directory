@@ -1,3 +1,9 @@
+class String  
+  def titleize
+    self.split(/ |\_/).map(&:capitalize).join(" ")
+  end
+end
+
 def get_student
   student = {
     name: "",
@@ -7,14 +13,14 @@ def get_student
   }
 
   print "Enter name: "
-  name = gets.chomp.capitalize
+  name = gets.chomp.titleize
   student[:name] = name
   if !name.empty?
     print "Enter hobbies: "
-    hobbies = gets.chomp.capitalize
+    hobbies = gets.chomp.titleize
     student[:hobbies] = hobbies
     print "Enter birthplace: "
-    birthplace = gets.chomp.capitalize
+    birthplace = gets.chomp.titleize
     student[:birthplace] = birthplace
   end
   return student
@@ -22,7 +28,7 @@ end
 
 def input_students
   puts "Please enter the details of the students"
-  puts "To finish, just hit return twice"
+  puts "To finish, just hit ENTER twice"
 
   students = []
 
@@ -30,7 +36,8 @@ def input_students
 
   while !student[:name].empty? do 
     students << student 
-    puts "Now we have #{students.length} students"
+    puts students.length == 1 ? ("Now we have #{students.length} student") : ("Now we have #{students.length} students")
+    puts "Enter another, or hit ENTER to finish"
     student = get_student
   end
   return students
