@@ -38,9 +38,15 @@ def print_specific_letter(students)
   students.each_with_index {|student, index| (student[:name].chr == letter ? (puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)") : ()) }
 end
 
+def print_shorter_than_twelve(students)
+  puts "Here are the students with a name shorter than 12 characters: "
+  students.each_with_index {|student, index| (student[:name].length < 12 ? (puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)") : ())}
+end
+
 students = input_students
 
 print_header
 print(students)
 print_footer(students)
-print_specific_letter(students)
+#print_specific_letter(students)
+print_shorter_than_twelve(students)
