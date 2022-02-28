@@ -4,12 +4,29 @@ class String
   end
 end
 
+def months_of_the_year
+    months_array = []
+    count = 1
+    while count <= 12
+      time = Time.new(0, count)
+      months_array << time.strftime("%B")
+      count += 1
+    end
+    return months_array
+  end
+
 def enter_cohort
   current_month = Time.now.strftime("%B")
   print "Enter the cohort (press ENTER to default to #{current_month}): "
   input_month = gets.chomp.capitalize
-  if input_month.empty?
-    return current_month.to_sym
+
+  while !months_of_the_year.include?(input_month)
+    if input_month.empty?
+      return current_month.to_sym
+    else
+      print "Typo? Please ensure you have typed the month correctly (press ENTER to default to #{current_month}): "
+      input_month = gets.chomp.capitalize
+    end
   end
   return input_month.to_sym
 end
