@@ -14,6 +14,7 @@ def input_students
     # get another name from the user
     name = STDIN.gets.chomp
   end
+  puts "You have finished inputting students. Please make another choice."
 end
 
 def print_header
@@ -80,6 +81,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "Students succssefully saved."
 end
 
 def load_students(filename = "students.csv")
@@ -89,12 +91,14 @@ def load_students(filename = "students.csv")
     add_student_to_list(name, cohort)
   end
   file.close
+  puts "Students successfully loaded."
 end
 
 def try_load_students
-  filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename)
+  if filename = ARGV.first
+    return filename
+  elsif File.exists?("students.csv")
+    filename = "students.csv"
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else
