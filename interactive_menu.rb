@@ -9,7 +9,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    @students << {name: name, cohort: :november}
+    add_student_to_list(name)
     puts "Now we have #{@students.count} students"
     # get another name from the user
     name = STDIN.gets.chomp
@@ -51,6 +51,10 @@ def show_students
   print_footer
 end
 
+def add_student_to_list(name, cohort = Time.now.strftime("%B"))
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def process(selection)
   case selection
   when "1"
@@ -82,7 +86,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student_to_list(name, cohort)
   end
   file.close
 end
