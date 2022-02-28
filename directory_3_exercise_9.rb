@@ -99,7 +99,7 @@ end
 
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students."
+  students.length == 1 ? (puts "We have #{students.count} great student.") : (puts "Overall, we have #{students.count} great students.")
 end
 
 def print_specific_letter(students)
