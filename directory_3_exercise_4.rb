@@ -23,8 +23,14 @@ def print_header
   puts "--------------------------------"
 end
 
-def print(students)
-  students.each_with_index { |student, index| puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)" }
+def print_students(students)
+  #students.each_with_index { |student, index| puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)" }
+  counter = 0
+  while counter < students.length
+    puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    counter += 1
+  end
+
 end
 
 def print_footer(names)
@@ -46,7 +52,7 @@ end
 students = input_students
 
 print_header
-print(students)
+print_students(students)
 print_footer(students)
 #print_specific_letter(students)
-print_shorter_than_twelve(students)
+#print_shorter_than_twelve(students)
