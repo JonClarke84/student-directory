@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = []
 
 
@@ -74,24 +76,33 @@ def process(selection)
 end
 
 def save_students
-  file = File.open("students.csv", "w")
+  file = File.open("students.csv", "w") do |file|
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
+    end
   end
-  file.close
   puts "Students succssefully saved."
 end
 
+# def load_students(filename = "students.csv")
+#   file = File.open(filename, "r") do |file|
+#   file.readlines.each do |line|
+#     name, cohort = line.chomp.split(',')
+#     add_student_to_list(name, cohort)
+#     end
+#   end
+#   puts "Students successfully loaded."
+# end
+
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    add_student_to_list(name, cohort)
+  file = File.open(filename, "r") do |file|
+    CSV.new(file).to_a.each do |student|
+    @students << {name: student[0], cohort: student[1]}
+    end
   end
-  file.close
-  puts "Students successfully loaded."
+  puts "Files successfully loaded"
 end
 
 def try_load_students
